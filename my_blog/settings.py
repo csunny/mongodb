@@ -1,3 +1,4 @@
+# -*- coding: utf-8
 """
 Django settings for my_blog project.
 
@@ -23,13 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'blym7av&u&)xm06*12p)icr+sj-*iu%$gq^sfhf-)e^8=9zxc^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 MONGODB_DATABASES = {
     "default": {
-        "name": "test",
+        "name": "blog",
         "host": '127.0.0.1',
         "tz_aware": True, # if you using timezones in django (USE_TZ = True)
     }
@@ -131,19 +132,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 from mongoengine import connect
-connect('test', host='127.0.0.1')
+connect('blog', host='127.0.0.1')
 AUTHENTICATION_BACKENDS = (
     ('django.contrib.auth.backends.ModelBackend'),
     ('mongoengine.django.auth.MongoEngineBackend'),
 )
 
 SESSION_ENGINE = 'mongoengine.django.sessions'
-AUTH_USER_MODE= 'mongo_auth.MongoUser'
+AUTH_USER_MODE = 'mongo_auth.MongoUser'
 
+# aliyun oss
 try:
-    import settings_local
+    from settings_local import *
 except ImportError:
     pass
 

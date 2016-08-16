@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect
 from .models import Poem
+
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html', {"show_title":"所有诗词信息", "poems":Poem.objects.all()})
+    poem = Poem.objects.all()
+    show_title = "诗词信息"
+    return render(request, 'home.html', locals())
+
 
 def add(request):
     if request.method == 'POST':
@@ -20,6 +24,7 @@ def add(request):
     else:
         return render(request, 'add.html')
 
+
 def search(request):
     if request.method == 'POST':
         author = request.POST.get('author')
@@ -29,6 +34,7 @@ def search(request):
 
     else:
         return render(request, 'search.html')
+
 
 def modify(request):
     if request.method == 'POST':
@@ -41,6 +47,7 @@ def modify(request):
         return HttpResponseRedirect('/')
     else:
         return render(request, 'modify.html')
+
 
 def delete(request):
     if request.method == 'POST':

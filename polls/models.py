@@ -2,11 +2,12 @@
 from django.db import models
 from mongoengine import *
 
+
 # Create your models here.
 class Poem(Document):
-    #poem
+    # poem
     meta = {
-        'collection':'poem_data'
+        'collection': 'poem_data'
     }
     poem_id = SequenceField(required=True, primary_key=True)
     author = StringField()
